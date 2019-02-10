@@ -2,28 +2,28 @@ package pl.sda.openweather;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import pl.sda.openweather.model.Weather;
+import pl.sda.openweather.model.WeatherService;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        try {
-            URL jsonURL = new URL("http://api.apixu.com/v1/current.json?key=a147a586068c46f2b4e90949191002&q=Paris");
+        String a;
 
-                ObjectMapper objectMapper = new ObjectMapper();
-                Weather weather = objectMapper.readValue(jsonURL, Weather.class);
-                System.out.println(weather);
+        WeatherService weatherService = new WeatherService("http://api.apixu.com/v1/current.json", "KLUCZ API");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj miejscowość: ");
+        a = scanner.next();
 
-            } catch (IOException e) {
-                e.printStackTrace();
 
-            }
+        weatherService.getCityWeather(a);
 
         }
     }
